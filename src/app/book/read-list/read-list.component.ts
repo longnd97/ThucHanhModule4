@@ -22,8 +22,9 @@ export class ReadListComponent implements OnInit {
   }
   changeReaded(id: any) {
     let book = this.books[id];
+    book.read = true;
     this.bookService.updateBook(book).subscribe((res) => {
-      book.read = true;
+      res = book;
     });
   }
 
@@ -34,7 +35,6 @@ export class ReadListComponent implements OnInit {
     };
 
     this.bookService.addBook(book).subscribe((res) => {
-      console.log(res);
       this.books.push(res);
     });
   }
