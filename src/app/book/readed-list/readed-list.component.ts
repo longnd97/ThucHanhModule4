@@ -19,5 +19,10 @@ export class ReadedListComponent implements OnInit {
       this.books = res;
     });
   }
-  addBook() {}
+  changeRead(id: any) {
+    let book = this.books[id];
+    this.bookService.updateBook(book).subscribe((res) => {
+      book.read = false;
+    });
+  }
 }

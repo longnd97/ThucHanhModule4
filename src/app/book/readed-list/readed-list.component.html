@@ -7,9 +7,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
+      <tr *ngFor="let book of books">
+        <td *ngIf="book.read">{{ book.name }}</td>
+        <td *ngIf="book.read">
+          <button (click)="changeRead(book.id)">Doc lai</button>
+        </td>
       </tr>
     </tbody>
   </table>

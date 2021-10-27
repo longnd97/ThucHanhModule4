@@ -9,31 +9,33 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./read-list.component.css'],
 })
 export class ReadListComponent implements OnInit {
-  formAddBook?: formGroup;
-  constructor(private fb: FormBuilder, private bookService: BookService) {}
   books: IBook[] = [];
-  private router: any;
-  book?: IBook = {};
-  read = true;
+  bookName?: string;
+  constructor(private bookService: BookService) {}
   ngOnInit(): void {
     this.getAllBook();
-    this.formAddBook = this.fb.group({
-      name: [''],
-      read: true,
-    });
   }
   getAllBook() {
     this.bookService.getAll().subscribe((res) => {
       this.books = res;
     });
   }
-  addBook() {
-    let data = this.formAddBook?.value;
-    this.bookService.addBook(data).subscribe((res) => {
-      this.router.navigate(['list']).then();
+  changeReaded(id: any) {
+    let book = this.books[id];
+    this.bookService.updateBook(book).subscribe((res) => {
+      book.read = true;
     });
   }
-  changeReaded() {
-    this.read = false;
+
+  addBook() {
+    let book = {
+      name: this.bookName,
+      read: false,
+    };
+
+    this.bookService.addBook(book).subscribe((res) => {
+      console.log(res);
+      this.books.push(res);
+    });
   }
 }
