@@ -1,0 +1,24 @@
+<div class="container">
+  <a routerLink="/">Ve trang chu</a>
+  <form *ngIf="formAddBook" [formGroup]="formAddBook"></form>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th colspan="2" style="text-align: center">Danh sach doc</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.name }}</td>
+        <td><button (click)="changeReaded()">Da doc</button></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: right">
+          <input type="text" [(ngModel)]="book">
+          <button type="submit" (click)="addBook()" class="btn btn-light">Them</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <a routerLink="/readed-list">Danh sach da doc</a>
+</div>
